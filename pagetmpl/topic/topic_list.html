@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table table-sm">
+  <thead>
+    <tr class="text-light bg-dark">
+      <th>上傳時間</th>
+      <th>科目</th>
+      <th>班級<th>
+      <th>上傳人</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for topic in topic_list %}
+    <tr>
+      <td>{{topic.created|date:"Y/m/d H:i"}}</td>
+      <td>
+        <a href="{% url 'topic_view' topic.id %}">{{ topic.subject }}</a>
+      </td>
+      <td>{{ topic.classes }}<td>
+      <td>{{topic.author}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "pagination.html" %}
+{% endblock %}

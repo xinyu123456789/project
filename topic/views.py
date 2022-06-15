@@ -34,3 +34,5 @@ class TopicDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('topic_list')
+
+# 123

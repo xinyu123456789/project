@@ -3,13 +3,13 @@ from django.urls import reverse
 from .models import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
-# 教學計劃列表
+# 學校列表
 class TopicList(ListView):
     model = Topic
     ordering = ['-created']
-    paginate_by = 20        #每頁教學計劃數量
+    paginate_by = 20        #每頁學校數量
 
-# 新增教學計劃
+# 新增學校
 class TopicNew(CreateView):
     model = Topic
     fields = ['subject', 'classes', 'content']
@@ -17,16 +17,13 @@ class TopicNew(CreateView):
     def get_success_url(self):
         return reverse('topic_list')
 
-    def form_valid(self, form):
-        # 自動將目前使用者填入討論主題的作者欄
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+    
 
-# 檢視教學計畫
+# 檢視
 class TopicView(DetailView):
     model = Topic
 
-# 刪除教學計畫
+# 刪除學校
 class TopicDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'topic.delete_topic'
     model = Topic
@@ -34,5 +31,9 @@ class TopicDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('topic_list')
+
+# 查詢學校
+class TopicSearch(DetailView):
+    model = Topic
 
 # 123

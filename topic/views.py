@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import *
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
+
 # 學校列表
 class TopicList(ListView):
     model = Topic
@@ -31,6 +32,10 @@ class TopicDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('topic_list')
+
+class TopicLocation(DetailView):
+    model = Topic
+    template_name = 'topic_location.html'
 
 # 查詢學校
 class TopicSearch(DetailView):

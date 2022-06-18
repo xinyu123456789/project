@@ -20,6 +20,7 @@ class Topic(models.Model):
     subject = models.IntegerField('公/私立', default=0,choices=SUBJECT_CHOICES)
     classes = models.IntegerField('類別', default=0,choices=CLASS_CHOICES)
     content = models.TextField('內容')
+
     created = models.DateTimeField('上傳時間', auto_now_add=True)
 
     def __str__(self):

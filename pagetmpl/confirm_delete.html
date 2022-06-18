@@ -3,11 +3,16 @@
 {% block content %}
 <h1>刪除</h1>
 <p class="alert alert-danger">
-  您確定要刪除嗎? <br/>
-  {{ object }}
+  您確定要刪除嗎?
+  <img src="https://cdn.discordapp.com/attachments/981095394937303072/987539696227876964/d0b9db97de61a011.png" width="30" />
+  <img src="https://cdn.discordapp.com/attachments/981095394937303072/987539696227876964/d0b9db97de61a011.png" width="30" />
+  <img src="https://cdn.discordapp.com/attachments/981095394937303072/987539696227876964/d0b9db97de61a011.png" width="30" />
+
+
 </p>
 <form action="" method="POST">
   {% csrf_token %}
   <input type="submit" class="btn btn-danger" value="是的，我要刪除" />
 </form>
+
 {% endblock %}

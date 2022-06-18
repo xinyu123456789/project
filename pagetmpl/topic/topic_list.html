@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h3>依照學校分類查詢</h3>
+<form action=""  method="get">
+  <div class="form-inline form-group">
+    <label>搜尋學校：</label>
+    <input type="text" name="query" class="form-control" placeholder="請輸入關鍵字..." value="{{ query }}" />
+    <input type="submit" class="form-control btn btn-primary" value="搜尋"/>
+  </div>  
+</form>
+
+<form action=""  method="get">
+  <div class="form-inline form-group">
+    <select name="query2" >
+      <option value="none">未選擇<br>
+      <option value="1">高中<br>
+      <option value="2">高職<br>
+      <option value="3">五專<br>
+      <option value="4">綜高<br>
+    </select>
+    <select name="query1" >
+      <option value="none">未選擇<br>
+      <option value="1">公立<br>
+      <option value="2">私立<br>
+    </select>
+    <input type="submit" class="form-control btn btn-primary" value="篩選"/>
+  </div>  
+</form>
+
 <table class="table table-sm">
   <thead>
     <tr class="text-light bg-dark">
       <th>上傳時間</th>
+      <th>學校</th>
       <th>公/私立</th>
       <th>類別</th>
       <th></th>
@@ -15,10 +43,11 @@
     {% for topic in topic_list %}
     <tr>
       <td>{{topic.created|date:"Y/m/d H:i"}}</td>
+      <td><a href="{% url 'topic_view' topic.id %}">{{ topic.content|linebreaks }}</a></td>
       <td>
-        <a href="{% url 'topic_view' topic.id %}">{{ topic.subject }}</a>
+        {{ topic.get_subject_display }}
       </td>
-      <td>{{ topic.classes }}<td>
+      <td>{{ topic.get_classes_display }}<td>
       <td>
         {% if perms.topic.delete_topic %}
         <a href="{% url 'topic_delete' topic.id %}" class="btn btn-sm btn-danger float-right">刪除主題</a>

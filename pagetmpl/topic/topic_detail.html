@@ -3,7 +3,7 @@
 {% block content %} 
 <div class="card">
   <div class="card-header d-md-flex justify-content-between">
-    <div class="h3">{{ topic.subject }}</div>
+    <div class="h3">{{ topic.content|linebreaks }}</div>
     
     <div class="text-muted">
       <small><i class="fas fa-clock"></i> {{ topic.created|date:"Y/m/d H:i" }}</small>
@@ -13,7 +13,28 @@
     {% if perms.topic.delete_topic %}
     <a href="{% url 'topic_delete' topic.id %}" class="btn btn-sm btn-danger float-right">刪除主題</a>
     {% endif %}
-    {{ topic.content|linebreaks }}
+    {{ topic.get_subject_display }}
+    <label>/</label>
+    {{topic.get_classes_display}}<br>
+    <p>入學方法:</p>
+    {{topic.road|linebreaks}}
+    {% if topic.picture %}
+    <div class="card-img col-md-5">
+      <a href="{{ topic.picture.url }}" target="_blank">
+        <img src="{{ topic.picture.url }}" class="mw-100">
+      </a>
+    </div>
+    {% endif %}
+    <br>
+    {% if topic.slink1 %}
+    <p>學校官網:</p>
+    <a href="{{ topic.slink1 }}" target="_blank">{{ topic.slink1 }}</a><br>
+    {% endif %}
+    {% if topic.slink2 %}
+    <p>招生參考網址:</p>
+    <a href="{{ topic.slink2 }}" target="_blank">{{ topic.slink2 }}</a>
+    {% endif %}
+    
   </div>
 </div>
 {% endblock %}

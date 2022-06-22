@@ -63,6 +63,6 @@ class TopicLocation(ListView):
     model = Location
     template_name = 'topic_location.html'
 
-# 查詢學校
+
 
 # 123
